@@ -32,11 +32,14 @@ namespace FirstMVCApplication.Controllers
         {
             Provider p = new Provider();
 
-            p.ProviderId = 1;
-            p.ProviderName = "Name1";
-            p.ProviderType = "Claims";
+            var data = p.GetProviderData();
 
-            ViewBag.Message = "Good Morning to this page";
+            p.ProviderId = Convert.ToInt32(data.Tables[0].Rows[0][0].ToString());
+            p.ProviderName = data.Tables[0].Rows[0][1].ToString();
+            p.ProviderType = data.Tables[0].Rows[0][2].ToString();
+
+            //ViewData["Orders"] = p;
+            //ViewBag.Message = "Good Morning to this page";
             return View(p);
         }
     }
