@@ -13,22 +13,28 @@ namespace FirstMVCApplication.Models
         public string ProviderName { get; set; }
         public string ProviderType { get; set; }
 
-        public DataSet GetProviderData()
+        public static DataSet GetProviderData()
         {
             var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Study\FirstMVCApplication\FirstMVCApplication\FirstMVCApplication\App_Data\ProviderDatabase.mdf;Integrated Security=True;";
             SqlConnection conn = new SqlConnection(connectionString);
 
             conn.Open();
             SqlCommand command = new SqlCommand("select * from Provider", conn);
-
-
             SqlDataAdapter adaptor = new SqlDataAdapter(command);
-
             DataSet ds = new DataSet();
-
             adaptor.Fill(ds);
-
             return ds;
+        }
+
+        internal void InsertProvider(Provider p)
+        {
+            var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Study\FirstMVCApplication\FirstMVCApplication\FirstMVCApplication\App_Data\ProviderDatabase.mdf;Integrated Security=True;";
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            string insertCmd = $"insert into Provider (ProviderName, ProviderType) values ('{p.ProviderName}','{p.ProviderType}')";
+            conn.Open();
+            SqlCommand command = new SqlCommand(insertCmd, conn);
+            command.ExecuteNonQuery();            
         }
     }    
 }
