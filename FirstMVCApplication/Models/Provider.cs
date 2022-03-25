@@ -15,7 +15,7 @@ namespace FirstMVCApplication.Models
 
         public static DataSet GetProviderData()
         {
-            var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Study\FirstMVCApplication\FirstMVCApplication\FirstMVCApplication\App_Data\ProviderDatabase.mdf;Integrated Security=True;";
+            var connectionString = @"Data Source=LAPTOP-HKBN8ODT\NIDHESH;Initial Catalog=ProductDatabase;User ID=mvcdev;Password=testing2";
             SqlConnection conn = new SqlConnection(connectionString);
 
             conn.Open();
@@ -28,7 +28,7 @@ namespace FirstMVCApplication.Models
 
         internal void InsertProvider(Provider p)
         {
-            var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Study\FirstMVCApplication\FirstMVCApplication\FirstMVCApplication\App_Data\ProviderDatabase.mdf;Integrated Security=True;";
+            var connectionString = @"Data Source=LAPTOP-HKBN8ODT\NIDHESH;Initial Catalog=ProductDatabase;User ID=mvcdev;Password=testing2";
             SqlConnection conn = new SqlConnection(connectionString);
 
             string insertCmd = $"insert into Provider (ProviderName, ProviderType) values ('{p.ProviderName}','{p.ProviderType}')";
