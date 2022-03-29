@@ -29,7 +29,7 @@ namespace FirstMVCApplication.Controllers
             return View("Contact");
         }
 
-
+        
         public ActionResult Create()
         {
             ViewBag.Message = "Your contact page.";
@@ -94,8 +94,18 @@ namespace FirstMVCApplication.Controllers
             List<Provider> p = new List<Provider>();
 
             var dataTables = Provider.GetProviderData();
+
             foreach (DataRow data in dataTables.Tables[0].Rows)
             {
+                //Provider newProvider = new Provider()
+                //{
+                //    ProviderId = Convert.ToInt32(data[0].ToString()),
+                //    ProviderName = data[1].ToString(),
+                //    ProviderType = data[2].ToString()
+                //};
+
+                //p.Add(newProvider);
+
                 p.Add(new Provider()
                 {
                     ProviderId = Convert.ToInt32(data[0].ToString()),
@@ -104,8 +114,6 @@ namespace FirstMVCApplication.Controllers
                 });
             }
 
-            //ViewData["Orders"] = p;
-            //ViewBag.Message = "Good Morning to this page";
             return View(p);
         }
     }
