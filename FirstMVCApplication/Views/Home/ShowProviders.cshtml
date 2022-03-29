@@ -23,15 +23,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.HiddenFor(modelItem => item.ProviderId)
             @Html.DisplayFor(modelItem => item.ProviderName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ProviderType)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProviderId }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProviderId, name=item.ProviderName, type =item.ProviderType }) |
             @Html.ActionLink("Details", "Details", new { id=item.ProviderId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProviderId })
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProviderId, name = item.ProviderName, type = item.ProviderType })
         </td>
     </tr>
 }

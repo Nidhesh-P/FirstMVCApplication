@@ -36,5 +36,27 @@ namespace FirstMVCApplication.Models
             SqlCommand command = new SqlCommand(insertCmd, conn);
             command.ExecuteNonQuery();            
         }
+
+        internal void UpdateProvider(Provider p)
+        {
+            var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Study\FirstMVCApplication\FirstMVCApplication\FirstMVCApplication\App_Data\ProviderDatabase.mdf;Integrated Security=True;";
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            string insertCmd = $"update provider set providertype='{p.ProviderType}', providername='{p. ProviderType}' where providerid={p.ProviderId}";
+            conn.Open();
+            SqlCommand command = new SqlCommand(insertCmd, conn);
+            command.ExecuteNonQuery();
+        }
+
+        internal static void DeleteProvider(int p)
+        {
+            var connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Study\FirstMVCApplication\FirstMVCApplication\FirstMVCApplication\App_Data\ProviderDatabase.mdf;Integrated Security=True;";
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            string insertCmd = $"Delete provider where providerid={p}";
+            conn.Open();
+            SqlCommand command = new SqlCommand(insertCmd, conn);
+            command.ExecuteNonQuery();
+        }
     }    
 }
