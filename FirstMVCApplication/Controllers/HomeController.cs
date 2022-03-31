@@ -57,11 +57,31 @@ namespace FirstMVCApplication.Controllers
             return View(new Provider() {ProviderId =id??0, ProviderType = type, ProviderName = name });
         }
 
+        public ActionResult Details(int? id)
+        {
+            ViewBag.Message = "Your contact page.";
+
+            var result = Provider.GetProviderDataByProviderId(id??0);
+
+
+            Provider newP = new Provider() 
+            {
+                ProviderId = Convert.ToInt32(result.Tables[0].Rows[0][0].ToString()),
+                ProviderName = result.Tables[0].Rows[0]["ProviderName"].ToString(),
+                ProviderType = result.Tables[0].Rows[0]["ProviderType"].ToString(),
+                Address = result.Tables[0].Rows[0]["Address"].ToString(),
+                City = result.Tables[0].Rows[0]["City"].ToString(),
+                State = result.Tables[0].Rows[0]["State"].ToString(),
+
+            };
+            return View(newP);
+        }
+
         public ActionResult Delete(int? id, string name, string type)
         {
             ViewBag.Message = "Your contact page.";
 
-            return PartialView(new Provider() { ProviderId = id ?? 0, ProviderType = type, ProviderName = name });
+            return View(new Provider() { ProviderId = id ?? 0, ProviderType = type, ProviderName = name });
         }
 
         [HttpPost]
