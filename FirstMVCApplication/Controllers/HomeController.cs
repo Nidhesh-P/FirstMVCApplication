@@ -136,5 +136,25 @@ namespace FirstMVCApplication.Controllers
 
             return View(p);
         }
+
+        public ActionResult ProvidersDetails()
+        {
+            List<Provider> p = new List<Provider>();
+
+            List<SelectListItem> providers = new List<SelectListItem>();
+
+            var dataTables = Provider.GetProviderData();
+
+            foreach (DataRow data in dataTables.Tables[0].Rows)
+            {
+                providers.Add(new SelectListItem()
+                {
+                    Text = data[1].ToString(),
+                    Value = data[0].ToString()
+                });
+            }
+
+            return View(providers);
+        }
     }
 }
