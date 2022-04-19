@@ -12,6 +12,7 @@ namespace FirstMVCApplication.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message  = Provider.GetValues();
             return View();
         }
 
@@ -64,17 +65,17 @@ namespace FirstMVCApplication.Controllers
             var result = Provider.GetProviderDataByProviderId(id??0);
 
 
-            Provider newP = new Provider() 
-            {
-                ProviderId = Convert.ToInt32(result.Tables[0].Rows[0][0].ToString()),
-                ProviderName = result.Tables[0].Rows[0]["ProviderName"].ToString(),
-                ProviderType = result.Tables[0].Rows[0]["ProviderType"].ToString(),
-                Address = result.Tables[0].Rows[0]["Address"].ToString(),
-                City = result.Tables[0].Rows[0]["City"].ToString(),
-                State = result.Tables[0].Rows[0]["State"].ToString(),
+            //Provider newP = new Provider() 
+            //{
+            //    ProviderId = Convert.ToInt32(result.Tables[0].Rows[0][0].ToString()),
+            //    ProviderName = result.Tables[0].Rows[0]["ProviderName"].ToString(),
+            //    ProviderType = result.Tables[0].Rows[0]["ProviderType"].ToString(),
+            //    Address = result.Tables[0].Rows[0]["Address"].ToString(),
+            //    City = result.Tables[0].Rows[0]["City"].ToString(),
+            //    State = result.Tables[0].Rows[0]["State"].ToString(),
 
-            };
-            return View(newP);
+            //};
+            return View(result);
         }
 
         public ActionResult Delete(int? id, string name, string type)
@@ -111,30 +112,30 @@ namespace FirstMVCApplication.Controllers
 
         public ActionResult ShowProviders()
         {
-            List<Provider> p = new List<Provider>();
+            //List<Provider> p = new List<Provider>();
 
-            var dataTables = Provider.GetProviderData();
+            var dataTables = Provider.GetProviderDataAsync();
 
-            foreach (DataRow data in dataTables.Tables[0].Rows)
-            {
-                //Provider newProvider = new Provider()
-                //{
-                //    ProviderId = Convert.ToInt32(data[0].ToString()),
-                //    ProviderName = data[1].ToString(),
-                //    ProviderType = data[2].ToString()
-                //};
+            //foreach (DataRow data in dataTables.Tables[0].Rows)
+            //{
+            //    //Provider newProvider = new Provider()
+            //    //{
+            //    //    ProviderId = Convert.ToInt32(data[0].ToString()),
+            //    //    ProviderName = data[1].ToString(),
+            //    //    ProviderType = data[2].ToString()
+            //    //};
 
-                //p.Add(newProvider);
+            //    //p.Add(newProvider);
 
-                p.Add(new Provider()
-                {
-                    ProviderId = Convert.ToInt32(data[0].ToString()),
-                    ProviderName = data[1].ToString(),
-                    ProviderType = data[2].ToString()
-                });
-            }
+            //    p.Add(new Provider()
+            //    {
+            //        ProviderId = Convert.ToInt32(data[0].ToString()),
+            //        ProviderName = data[1].ToString(),
+            //        ProviderType = data[2].ToString()
+            //    });
+            //}
 
-            return View(p);
+            return View(dataTables);
         }
 
         public ActionResult ProvidersDetails()
@@ -143,18 +144,18 @@ namespace FirstMVCApplication.Controllers
 
             List<SelectListItem> providers = new List<SelectListItem>();
 
-            var dataTables = Provider.GetProviderData();
+            var dataTables = Provider.GetProviderDataAsync();
 
-            foreach (DataRow data in dataTables.Tables[0].Rows)
-            {
-                providers.Add(new SelectListItem()
-                {
-                    Text = data[1].ToString(),
-                    Value = data[0].ToString()
-                });
-            }
+            //foreach (DataRow data in dataTables.Tables[0].Rows)
+            //{
+            //    providers.Add(new SelectListItem()
+            //    {
+            //        Text = data[1].ToString(),
+            //        Value = data[0].ToString()
+            //    });
+            //}
 
-            return View(providers);
+            return View(dataTables);
         }
     }
 }
